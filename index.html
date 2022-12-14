@@ -9,6 +9,15 @@
     <link rel="stylesheet" href="style.css">
     </head>
   <body>
+    <div id='controls' class='container'></div>
+    <toggle></toggle>
+    <select id='data--var'>
+      <option></option>
+      <option></option>
+      <option></option>
+      <option></option>
+      <option></option>
+    </select>
     <section id='map'></section>
     <script defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC75kqs_RD694ILnPBt0cOAsyzQwpSBfaU&callback=initMap"
@@ -28,7 +37,9 @@
     map:map,
     draggable: true
   });
-
-}</script>
+  
+}
+    </script>
+    <script type="module" src="./script.js">import { Dataset } from './data.js';</script>
   </body>
 </html>

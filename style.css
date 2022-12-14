@@ -10,4 +10,10 @@ html, body {
   padding: 55px;
   display: flex;
   flex-direction: row;
+  box-shadow: 0 4px 6px -4px #333;
+  background: rgb(255,255,255);
+  border: rgb(229, 229, 229) 1px solid;
+  overflow: hidden;
+  position: absolute;
 }
+
