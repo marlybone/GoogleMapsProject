@@ -1,5 +1,5 @@
-
 const myLngLat = {lat: 51.4931, lng: -0.118092};
+const country = '';
 var mapStyle = [{
           'featureType': 'all',
           'elementType': 'all',
@@ -18,27 +18,35 @@ var mapStyle = [{
           'stylers': [{'visibility': 'on'}, {'hue': '#5f94ff'}, {'lightness': 60}]
         }];
 
+/* event listeners */
+
+
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '3dcd448ec1msh2b4f01bc724171fp1ee5bdjsn24e082f33ce9',
+		'X-RapidAPI-Host': 'cost-of-living-prices-by-city-country.p.rapidapi.com'
+	}
+};
+
+/* Functions */
 async function fetchMapOverlapData() {
   const [geoResponse, statResponse] = await Promise.all([
     fetch('https://datahub.io/core/geo-countries/datapackage.json'),
-    fetch('https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy')
+    fetch(`'https://cost-of-living-prices-by-city-country.p.rapidapi.com/get-cities-by-country?country=${country}`)
   ]);
   const geo = await geoResponse.json();
   const stat = await statResponse.json();
-
   return [geo, stat];
 }
 
 fetchMapOverlapData().then(([stat, geo]) => {
- stat;
- geo;
- for (const id in geo) {
-   console.log(geo[id])
- }
 }).catch(err => {
   console.log(err)
 });
 
 
-
-
+  map.data.addListener('mouseover', mouseInToRegion);
+  mouseInToRegion = function(e) {
+    console.log('works');
+  }

@@ -9,16 +9,47 @@
     <link rel="stylesheet" href="style.css">
     </head>
   <body>
-    <div id='controls' class='container'></div>
-    <toggle></toggle>
-    <select id='data--var'>
-      <option></option>
-      <option></option>
-      <option></option>
-      <option></option>
-      <option></option>
-    </select>
-    <section id='map'></section>
+    <div id="controls" class="nicebox">
+      <div>
+        <select id="census-variable">
+          <option
+            value=
+          >
+
+          </option>
+          <option
+            value=
+          >
+
+          </option>
+          <option
+            value=
+          >
+
+          </option>
+          <option
+            value=
+          >
+
+          </option>
+          <option
+            value=
+          >
+          
+          </option>
+        </select>
+      </div>
+      <div id="legend">
+        <div id="census-min">min</div>
+        <div class="color-key"><span id="data-caret">&#x25c6;</span></div>
+        <div id="census-max">max</div>
+      </div>
+    </div>
+    <div id="data-box" class="nicebox">
+      <label id="data-label" for="data-value"></label>
+      <span id="data-value"></span>
+    </div>
+    <div id="map"></div>
     <script defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC75kqs_RD694ILnPBt0cOAsyzQwpSBfaU&callback=initMap"
     ></script>
@@ -37,7 +68,12 @@
     map:map,
     draggable: true
   });
-  map.data.loadGeoJson('./eu2.geojson')
+  map.data.loadGeoJson('https://s3.amazonaws.com/rawstore.datahub.io/23f420f929e0e09c39d916b8aaa166fb.geojson');
+   map.data.setStyle({
+    fillColor: 'green',
+    strokeWeight: 1,
+    strokeColor: 'blue'
+   })
   loadMapShapes();
 }
     </script>
