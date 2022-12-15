@@ -1,3 +1,4 @@
+
 const myLngLat = {lat: 51.4931, lng: -0.118092};
 var mapStyle = [{
           'featureType': 'all',
@@ -29,10 +30,11 @@ async function fetchMapOverlapData() {
 }
 
 fetchMapOverlapData().then(([stat, geo]) => {
-  stat;
-  for (const id in stat.resources) {
-    if (stat.resources[id].name === 'csv')
-  }
+ stat;
+ geo;
+ for (const id in geo) {
+   console.log(geo[id])
+ }
 }).catch(err => {
   console.log(err)
 });

@@ -37,7 +37,8 @@
     map:map,
     draggable: true
   });
-  
+  map.data.loadGeoJson('./eu2.geojson')
+  loadMapShapes();
 }
     </script>
     <script type="module" src="./script.js">import { Dataset } from './data.js';</script>
