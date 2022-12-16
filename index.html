@@ -15,7 +15,7 @@
           <option
             value=
           >
-
+        Cost of Living 
           </option>
           <option
             value=
@@ -61,20 +61,35 @@
      styles: mapStyle,
    };
 
-      var map = new google.maps.Map(document.getElementById('map'), options)
-
+  var map = new google.maps.Map(document.getElementById('map'), options)
+  var geoCoder = new google.maps.Geocoder(); 
   var marker = new google.maps.Marker({
     position: myLngLat,
     map:map,
     draggable: true
   });
-  map.data.loadGeoJson('https://s3.amazonaws.com/rawstore.datahub.io/23f420f929e0e09c39d916b8aaa166fb.geojson');
+
+
+map.data.loadGeoJson('https://s3.amazonaws.com/rawstore.datahub.io/23f420f929e0e09c39d916b8aaa166fb.geojson');
    map.data.setStyle({
     fillColor: 'green',
-    strokeWeight: 1,
-    strokeColor: 'blue'
-   })
-  loadMapShapes();
+    strokeWeight: 0.7,
+    strokeColor: 'white',
+    strokeOpacity: 0.4
+   });
+    map.data.addListener('mouseover', function(e) {
+      map.data.overrideStyle(e.feature, {strokeWeight: 2.5, strokeOpacity: 1})
+    map.data.addListener('mouseout', function(e) {
+      map.data.overrideStyle(e.feature, {strokeWeight: 0.7, strokeOpacity: 0.4})
+    });
+      });
+    map.data.addListener('click', function(e) {
+    lat = e.latLng.lng();
+    lng = e.latLng.lat();
+    console.log(lat, lng);
+});
+
+    loadMapShapes();
 }
     </script>
     <script type="module" src="./script.js">import { Dataset } from './data.js';</script>

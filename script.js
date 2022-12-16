@@ -1,5 +1,4 @@
 const myLngLat = {lat: 51.4931, lng: -0.118092};
-const country = '';
 var mapStyle = [{
           'featureType': 'all',
           'elementType': 'all',
@@ -18,8 +17,10 @@ var mapStyle = [{
           'stylers': [{'visibility': 'on'}, {'hue': '#5f94ff'}, {'lightness': 60}]
         }];
 
-/* event listeners */
 
+var lat = ''; 
+var lng = '';
+var country = '';
 
 const options = {
 	method: 'GET',
@@ -29,7 +30,6 @@ const options = {
 	}
 };
 
-/* Functions */
 async function fetchMapOverlapData() {
   const [geoResponse, statResponse] = await Promise.all([
     fetch('https://datahub.io/core/geo-countries/datapackage.json'),
@@ -44,9 +44,4 @@ fetchMapOverlapData().then(([stat, geo]) => {
 }).catch(err => {
   console.log(err)
 });
-
-
-  map.data.addListener('mouseover', mouseInToRegion);
-  mouseInToRegion = function(e) {
-    console.log('works');
-  }
+  
