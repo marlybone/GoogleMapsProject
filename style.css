@@ -77,3 +77,11 @@ body,
   font-size: 14px;
   width: 14px;
 }
+
+#data-box {
+  top: 10px;
+  left: 500px;
+  height: 45px;
+  line-height: 45px;
+  display: none;
+}
