@@ -18,17 +18,21 @@ var mapStyle = [{
           'stylers': [{'visibility': 'on'}, {'hue': '#5f94ff'}, {'lightness': 60}]
         }];
 
-
+var polygonData = 'https://s3.amazonaws.com/rawstore.datahub.io/23f420f929e0e09c39d916b8aaa166fb.geojson';
 var lat = ''; 
 var lng = '';
-const searchLocation = [];
-const country = 'http://country.io/names.json';
+var searchLocation = [];
+const polygons = [];
+const countryList = './countries.json';
 
 
-fetch(countryList)
+
+
+fetch(polygonData)
   .then(res => res.json())
   .then(data => {
-    searchLocation.push(...data)
+    searchLocation = [...Object.values(data)];
+    console.log(searchLocation);
   })
 
 function getLocation(match, cities) {
