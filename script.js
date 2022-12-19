@@ -21,7 +21,30 @@ var mapStyle = [{
 
 var lat = ''; 
 var lng = '';
-var country = '';
+const searchLocation = [];
+const country = 'http://country.io/names.json';
+
+
+fetch(countryList)
+  .then(res => res.json())
+  .then(data => {
+    searchLocation.push(...data)
+  })
+
+function getLocation(match, cities) {
+  return cities.filter(e => {
+    const reg = new regExp(match, 'gi');
+    return e.match(reg);
+  })
+}
+
+function displayLocation() {
+  
+}
+
+const inputLoc = document.querySelector('country-name');
+const suggestion = document.querySelector('suggestion');
+
 
 const options = {
 	method: 'GET',
@@ -34,7 +57,7 @@ const options = {
 async function fetchMapOverlapData() {
   const [geoResponse, statResponse] = await Promise.all([
     fetch('https://datahub.io/core/geo-countries/datapackage.json'),
-    fetch(`'https://cost-of-living-prices-by-city-country.p.rapidapi.com/get-cities-by-country?country=${country}`)
+    fetch(`https://cost-of-living-prices-by-city-country.p.rapidapi.com/get-cities-by-country?country=${country}`)
   ]);
   const geo = await geoResponse.json();
   const stat = await statResponse.json();

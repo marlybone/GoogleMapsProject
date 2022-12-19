@@ -45,11 +45,16 @@
         <div id="census-max">max</div>
       </div>
     </div>
+    <div class='nicebox'>
+            <input class='country-name' type='text'></input>     
+            <button id="button" type="button">Search</button>
+      <ul class='suggestions'></ul>
+    </div>
     <div id="data-box" class="nicebox">
       <label id="data-label" for="data-value"></label>
       <span id="data-value"></span>
     </div>
-    <div id="map"></div>
+    <section id="map"></section>
     <script defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC75kqs_RD694ILnPBt0cOAsyzQwpSBfaU&callback=initMap"
     ></script>
@@ -83,36 +88,6 @@ map.data.loadGeoJson('https://s3.amazonaws.com/rawstore.datahub.io/23f420f929e0e
       map.data.overrideStyle(e.feature, {strokeWeight: 0.7, strokeOpacity: 0.4})
     });
       });
-    map.data.addListener('click', function(e) {
-    lat = e.latLng.lat();
-    lng = e.latLng.lng();
-    var latLngLit = {lat,lng};
-    geoCoder.geocode({'latLng': latLngLit}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-      console.log(results);
-        if (results[1]) {
-          var indice=0;
-        for (var j=0; j<results.length; j++)
-        {
-            if (results[j].types[0]=='locality')
-                {
-                    indice=j;
-                    break;
-                }
-            }
-         for(var i=0; i<results[j].address_components.length; i++)
-            {
-               if (results[j].address_components[i].types[0] == "country") {
-                        //this is the object you are looking for
-                        country = results[j].address_components[i].long_name;
-               
-               }  
-            }
-          console.log(country)
-    };
-  }
-});
-    });
    loadMapShapes();
 }
     </script>
