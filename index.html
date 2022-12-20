@@ -82,12 +82,17 @@ map.data.loadGeoJson(polygonData);
     strokeColor: 'white',
     strokeOpacity: 0.4
    });
+  map.data.addListener('click', function(e) {
+    searchLocation = (e.feature.getProperty('ISO_A3').slice(0, 2));
+    fetchMapOverlapData();
+  });
     map.data.addListener('mouseover', function(e) {
       map.data.overrideStyle(e.feature, {strokeWeight: 2.5, strokeOpacity: 1})
     map.data.addListener('mouseout', function(e) {
       map.data.overrideStyle(e.feature, {strokeWeight: 0.7, strokeOpacity: 0.4})
     });
       });
+  
    loadMapShapes();
 }
     </script>

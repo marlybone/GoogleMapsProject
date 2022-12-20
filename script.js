@@ -21,8 +21,9 @@ var mapStyle = [{
 var polygonData = 'https://s3.amazonaws.com/rawstore.datahub.io/23f420f929e0e09c39d916b8aaa166fb.geojson';
 var lat = ''; 
 var lng = '';
-var searchLocation = [];
-const polygons = [];
+var searchLocation;
+var stat = '';
+var geo = '';
 const countryList = './countries.json';
 
 
@@ -31,8 +32,7 @@ const countryList = './countries.json';
 fetch(polygonData)
   .then(res => res.json())
   .then(data => {
-    searchLocation = [...Object.values(data)];
-    console.log(searchLocation);
+
   })
 
 function getLocation(match, cities) {
@@ -53,23 +53,18 @@ const suggestion = document.querySelector('suggestion');
 const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '3dcd448ec1msh2b4f01bc724171fp1ee5bdjsn24e082f33ce9',
-		'X-RapidAPI-Host': 'cost-of-living-prices-by-city-country.p.rapidapi.com'
+    'X-RapidAPI-Key': '3dcd448ec1msh2b4f01bc724171fp1ee5bdjsn24e082f33ce9',
+		'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com'
 	}
 };
 
-async function fetchMapOverlapData() {
-  const [geoResponse, statResponse] = await Promise.all([
-    fetch('https://datahub.io/core/geo-countries/datapackage.json'),
-    fetch(`https://cost-of-living-prices-by-city-country.p.rapidapi.com/get-cities-by-country?country=${country}`)
-  ]);
-  const geo = await geoResponse.json();
-  const stat = await statResponse.json();
-  return [geo, stat];
-}
+function fetchMapOverlapData() {
+    fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/countries/${searchLocation}`, options)
+  .then(res => res.json())
+  .then(data => {
+  console.log(searchLocation);
+  stat = data;
+  console.log(stat)
+  })
 
-fetchMapOverlapData().then(([stat, geo]) => {
-}).catch(err => {
-  console.log(err)
-});
-  
+}
