@@ -18,22 +18,20 @@ var mapStyle = [{
           'stylers': [{'visibility': 'on'}, {'hue': '#5f94ff'}, {'lightness': 60}]
         }];
 
+
 var polygonData = 'https://s3.amazonaws.com/rawstore.datahub.io/23f420f929e0e09c39d916b8aaa166fb.geojson';
 var lat = ''; 
 var lng = '';
 var searchLocation;
 var stat = '';
 var geo = '';
+var cities = [];
 const countryList = './countries.json';
+const cityOptions = {
+  types: ['(cities)'],
+  strickBounds: false,
+}
 
-
-
-
-fetch(polygonData)
-  .then(res => res.json())
-  .then(data => {
-
-  })
 
 function getLocation(match, cities) {
   return cities.filter(e => {
@@ -41,14 +39,6 @@ function getLocation(match, cities) {
     return e.match(reg);
   })
 }
-
-function displayLocation() {
-  
-}
-
-const inputLoc = document.querySelector('country-name');
-const suggestion = document.querySelector('suggestion');
-
 
 const options = {
 	method: 'GET',
